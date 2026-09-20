@@ -1,14 +1,16 @@
 # Publish Jev Decision Lab
 
-## GitHub Pages
+## Public URL
 
-The public site is deployed directly from this repository:
+The canonical public site is:
 
 ```text
-https://radrebelsam.github.io/jev-decision-lab/
+https://jevdecisionlab.radrebeldeveloper.com/
 ```
 
-Every push to `main` runs the Pages workflow. It installs dependencies, creates the static export, and deploys `out/`.
+GitHub Pages hosts the site from `RadRebelSam/jev-decision-lab`. After the custom domain is active, the default project URL redirects to the canonical URL above.
+
+Every push to `main` runs the Pages workflow. It installs dependencies, creates a root-relative static export, and deploys `out/`.
 
 Build the same site locally:
 
@@ -19,7 +21,7 @@ npm run build:pages
 
 ## Custom subdomain
 
-Desired address:
+Custom address:
 
 ```text
 https://jevdecisionlab.radrebeldeveloper.com
@@ -27,4 +29,4 @@ https://jevdecisionlab.radrebeldeveloper.com
 
 A DNS CNAME can point `jevdecisionlab` to `radrebelsam.github.io`.
 
-After DNS is ready, add `jevdecisionlab.radrebeldeveloper.com` under **Settings → Pages → Custom domain** in this repository. GitHub will then create the required `CNAME` file and provision HTTPS.
+The repository must also list `jevdecisionlab.radrebeldeveloper.com` under **Settings → Pages → Custom domain**. Because this project deploys through GitHub Actions, a repository `CNAME` file is not required.
