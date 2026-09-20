@@ -16,7 +16,9 @@ function VariantBadge({ value }: { value: VariantId }) {
 }
 
 export function ProofLab() {
-  const [data, setData] = useState<BenchmarkResponse | null>(null);
+  const [data, setData] = useState<BenchmarkResponse | null>(
+    STATIC_DEMO ? RECORDED_BENCHMARK : null,
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
