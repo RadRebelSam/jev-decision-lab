@@ -4,7 +4,7 @@
 
 An open-source Next.js MVP that compares a fixed personalization function with a hybrid function-plus-Jev decision architecture.
 
-Public site: [jevdecisionlab.radrebeldeveloper.com](https://jevdecisionlab.radrebeldeveloper.com/)
+Public site: [radrebelsam.github.io/jev-decision-lab](https://radrebelsam.github.io/jev-decision-lab/)
 
 ## What it demonstrates
 
@@ -114,7 +114,7 @@ See [DEPLOY.md](./DEPLOY.md) for the GitHub Pages deployment and custom-domain n
 
 ## Independence
 
-Independent Jev experiment by [Rad Rebel Developer](https://radrebeldeveloper.com). Not affiliated with TypeSafe AI.
+Independent Jev experiment by [RadRebelDeveloper](https://radrebeldeveloper.com). Not affiliated with TypeSafe AI.
 
 ## License
 
