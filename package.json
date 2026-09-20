@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:static": "cross-env STATIC_EXPORT=1 NEXT_PUBLIC_STATIC_DEMO=1 next build",
+    "build:pages": "cross-env STATIC_EXPORT=1 NEXT_PUBLIC_STATIC_DEMO=1 BASE_PATH=/awesome-jev/jev-decision-lab NEXT_PUBLIC_BASE_PATH=/awesome-jev/jev-decision-lab next build",
     "start": "next start"
   },
   "dependencies": {

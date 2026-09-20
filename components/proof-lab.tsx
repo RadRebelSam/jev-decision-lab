@@ -6,6 +6,7 @@ import { BENCHMARK_SCENARIOS, RECORDED_BENCHMARK, type BenchmarkResponse } from 
 import { VARIANTS, type VariantId } from "@/lib/personalization";
 
 const STATIC_DEMO = process.env.NEXT_PUBLIC_STATIC_DEMO === "1";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const GITHUB_URL = "https://github.com/RadRebelSam/jev-decision-lab";
 
 const pct = (correct: number, total: number) => `${Math.round((correct / total) * 100)}%`;
@@ -47,7 +48,7 @@ export function ProofLab() {
     <main className="proof-shell">
       <header className="nav-wrap proof-nav-wrap">
         <nav className="nav">
-          <Link className="brand" href="/"><img className="brand-logo" src="/jev-decision-lab-logo.png" alt="" /><span>Jev Decision Lab</span></Link>
+          <Link className="brand" href="/"><img className="brand-logo" src={`${BASE_PATH}/jev-decision-lab-logo.png`} alt="" /><span>Jev Decision Lab</span></Link>
           <div className="nav-links"><Link href="/demo">Personalization demo</Link><a href="#cases">Test set</a><a href="#method">Method</a></div>
           <a className="nav-cta nav-link-button" href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
         </nav>

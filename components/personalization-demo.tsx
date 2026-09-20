@@ -14,6 +14,7 @@ import {
 } from "@/lib/personalization";
 
 const STATIC_DEMO = process.env.NEXT_PUBLIC_STATIC_DEMO === "1";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const HISTORY_KEY = "jev-demo:page-history";
 const REFERRER_KEY = "jev-demo:referrer";
@@ -167,7 +168,7 @@ export function PersonalizationDemo() {
       <header className="nav-wrap">
         <nav className="nav" aria-label="Main navigation">
           <Link className="brand" href="/" aria-label="Jev Decision Lab home">
-            <img className="brand-logo" src="/jev-decision-lab-logo.png" alt="" />
+            <img className="brand-logo" src={`${BASE_PATH}/jev-decision-lab-logo.png`} alt="" />
             <span>Jev Decision Lab</span>
           </Link>
           <div className="nav-links">
@@ -277,7 +278,7 @@ export function PersonalizationDemo() {
       </section>
 
       <footer>
-        <div className="brand"><img className="brand-logo" src="/jev-decision-lab-logo.png" alt="" /><span>Jev Decision Lab</span></div>
+        <div className="brand"><img className="brand-logo" src={`${BASE_PATH}/jev-decision-lab-logo.png`} alt="" /><span>Jev Decision Lab</span></div>
         <p>Personalization without the platform.</p>
         <span>Jev demo / 2026</span>
       </footer>

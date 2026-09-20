@@ -6,7 +6,7 @@
 
 An open-source Next.js MVP that compares a fixed personalization function with a hybrid function-plus-Jev decision architecture.
 
-Public site: `https://jevdecisionlab.radrebeldeveloper.com`
+Public site: [radrebelsam.github.io/awesome-jev/jev-decision-lab/](https://radrebelsam.github.io/awesome-jev/jev-decision-lab/)
 
 ## What it demonstrates
 
@@ -112,7 +112,7 @@ Never prefix the API key with `NEXT_PUBLIC_`.
 
 ## Deploy
 
-See [HOSTINGER_DEPLOY.md](./HOSTINGER_DEPLOY.md) for the static subdomain deployment.
+See [DEPLOY.md](./DEPLOY.md) for the GitHub Pages deployment and custom-domain notes.
 
 ## Independence
 
