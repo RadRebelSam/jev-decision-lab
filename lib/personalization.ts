@@ -31,6 +31,39 @@ export type PersonalizationDecision = {
   reason?: string;
 };
 
+const RECORDED_DEMO_DECISIONS = {
+  direct: {
+    variant: "builder",
+    confidence: 0.96,
+    probabilities: { builder: 0.98, campaign: 0, returning: 0.02 },
+    source: "jev",
+    latencyMs: 435,
+    reason: "Recorded Jev run for the direct-visit demo scenario",
+  },
+  campaign: {
+    variant: "campaign",
+    confidence: 0.85,
+    probabilities: { builder: 0.05, campaign: 0.9, returning: 0.05 },
+    source: "jev",
+    latencyMs: 180,
+    reason: "Recorded Jev run for the UTM-campaign demo scenario",
+  },
+  returning: {
+    variant: "returning",
+    confidence: 0.54,
+    probabilities: { builder: 0.31, campaign: 0, returning: 0.69 },
+    source: "jev",
+    latencyMs: 145,
+    reason: "Recorded Jev run for the returning-visitor demo scenario",
+  },
+} satisfies Record<string, PersonalizationDecision>;
+
+export function recordedDemoDecision(context: PersonalizationContext): PersonalizationDecision {
+  const hasUtm = Object.values(context.utm).some(Boolean);
+  const key = hasUtm ? "campaign" : context.pageHistory.length >= 3 ? "returning" : "direct";
+  return { ...RECORDED_DEMO_DECISIONS[key] };
+}
+
 export const VARIANTS: Record<
   VariantId,
   {

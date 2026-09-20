@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   VARIANTS,
   fallbackDecision,
+  recordedDemoDecision,
   type PageVisit,
   type PersonalizationContext,
   type PersonalizationDecision,
@@ -97,7 +98,7 @@ export function PersonalizationDemo() {
   useEffect(() => {
     if (!context) return;
     if (STATIC_DEMO) {
-      setDecision(fallbackDecision(context, "Static public demo: function-only preview"));
+      setDecision(recordedDemoDecision(context));
       setLoading(false);
       return;
     }
@@ -136,7 +137,7 @@ export function PersonalizationDemo() {
   function tryCampaign() {
     sessionStorage.removeItem(UTM_KEY);
     localStorage.removeItem(HISTORY_KEY);
-    router.push("/?utm_source=producthunt&utm_medium=social&utm_campaign=launch-week");
+    router.replace(`${pathname}?utm_source=producthunt&utm_medium=social&utm_campaign=launch-week`, { scroll: false });
     setRefreshKey((key) => key + 1);
   }
 
@@ -148,7 +149,7 @@ export function PersonalizationDemo() {
     }));
     localStorage.setItem(HISTORY_KEY, JSON.stringify(seeded));
     sessionStorage.removeItem(UTM_KEY);
-    router.push("/");
+    router.replace(pathname, { scroll: false });
     setRefreshKey((key) => key + 1);
   }
 
@@ -156,7 +157,7 @@ export function PersonalizationDemo() {
     localStorage.removeItem(HISTORY_KEY);
     sessionStorage.removeItem(UTM_KEY);
     sessionStorage.setItem(REFERRER_KEY, "");
-    router.push("/");
+    router.replace(pathname, { scroll: false });
     setRefreshKey((key) => key + 1);
   }
 
@@ -206,7 +207,7 @@ export function PersonalizationDemo() {
           <div className="card-topline">
             <span>LIVE DECISION</span>
             <span className={`status ${decision?.source === "jev" ? "live" : "fallback"}`}>
-              {loading ? "DECIDING" : decision?.source === "jev" ? "JEV" : "LOCAL FALLBACK"}
+              {loading ? "DECIDING" : decision?.source === "jev" ? STATIC_DEMO ? "RECORDED JEV" : "JEV" : "LOCAL FALLBACK"}
             </span>
           </div>
           <div className="variant-orbit">
@@ -295,10 +296,10 @@ export function PersonalizationDemo() {
               <div className="output-card">
                 <div><span>Variant</span><strong>{variant.label}</strong></div>
                 <div><span>Confidence</span><strong>{loading ? "—" : percent(decision?.confidence || 0)}</strong></div>
-                <div><span>Source</span><strong>{decision?.source === "jev" ? "Jev API" : "Local rule"}</strong></div>
+                <div><span>Source</span><strong>{decision?.source === "jev" ? STATIC_DEMO ? "Recorded Jev run" : "Jev API" : "Local rule"}</strong></div>
                 <div><span>Latency</span><strong>{decision?.latencyMs ?? "—"} ms</strong></div>
               </div>
-              {decision?.reason && <p className="fallback-note">Fallback reason: {decision.reason}</p>}
+              {decision?.reason && <p className="fallback-note">Note: {decision.reason}</p>}
             </div>
             <div className="inspect-section">
               <span className="inspect-label">INPUT / REFERRER</span>
