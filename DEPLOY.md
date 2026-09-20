@@ -6,6 +6,14 @@ The public site is deployed inside the existing `awesome-jev` Pages site:
 
 ```text
 https://radrebelsam.github.io/awesome-jev/jev-decision-lab/
+
+The `awesome-jev` Pages project currently redirects this URL to:
+
+```text
+https://jev.radrebeldeveloper.com/jev-decision-lab/
+```
+
+For that reason, `npm run build:pages` uses `/jev-decision-lab` as the runtime base path.
 ```
 
 Build the correctly prefixed static site:
