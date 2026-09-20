@@ -1,7 +1,5 @@
 # Jev Decision Lab
 
-![Jev Decision Lab logo](./public/jev-decision-lab-logo.png)
-
 **Rules for the obvious. Jev for the ambiguous.**
 
 An open-source Next.js MVP that compares a fixed personalization function with a hybrid function-plus-Jev decision architecture.
