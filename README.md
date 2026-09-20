@@ -6,7 +6,7 @@
 
 An open-source Next.js MVP that compares a fixed personalization function with a hybrid function-plus-Jev decision architecture.
 
-Public site: [radrebelsam.github.io/awesome-jev/jev-decision-lab/](https://radrebelsam.github.io/awesome-jev/jev-decision-lab/)
+Public site: [radrebelsam.github.io/jev-decision-lab/](https://radrebelsam.github.io/jev-decision-lab/)
 
 ## What it demonstrates
 
