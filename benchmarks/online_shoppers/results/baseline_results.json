@@ -1,0 +1,78 @@
+{
+  "dataset": {
+    "name": "Online Shoppers Purchasing Intention",
+    "source": "https://archive.ics.uci.edu/static/public/468/online%2Bshoppers%2Bpurchasing%2Bintention%2Bdataset.zip",
+    "rows": 12330,
+    "positive_rows": 1908
+  },
+  "feature_policy": {
+    "target_only": [
+      "Revenue"
+    ],
+    "selected": [
+      "Administrative",
+      "Administrative_Duration",
+      "Informational",
+      "Informational_Duration",
+      "ProductRelated",
+      "ProductRelated_Duration",
+      "BounceRates",
+      "ExitRates",
+      "SpecialDay",
+      "Month",
+      "OperatingSystems",
+      "Browser",
+      "Region",
+      "TrafficType",
+      "VisitorType",
+      "Weekend"
+    ],
+    "excluded": [
+      "PageValues"
+    ],
+    "exclusion_reason": {
+      "PageValues": "Google Analytics page value is computed from pages visited before a transaction. It is late-session and too outcome-adjacent for this comparison."
+    }
+  },
+  "split": {
+    "seed": 42,
+    "test_size": 0.25,
+    "train_rows": 9247,
+    "test_rows": 3083,
+    "stratified": true
+  },
+  "baselines": {
+    "simple_rule": {
+      "definition": "At least four of: >=10 product pages, >=600 product seconds, bounce rate <=0.02, exit rate <=0.05, returning visitor.",
+      "metrics": {
+        "accuracy": 0.4982160233538761,
+        "precision": 0.2053964757709251,
+        "recall": 0.7819706498951782,
+        "f1": 0.3253379851722634,
+        "brier_score": "unavailable",
+        "ece_10_bin": "unavailable"
+      },
+      "latency_ms": 1.989099953789264,
+      "api_cost_usd": 0.0
+    },
+    "logistic_regression": {
+      "definition": "Scaled numeric features plus one-hot categorical features and balanced class weights.",
+      "metrics": {
+        "accuracy": 0.635744404800519,
+        "precision": 0.2631964809384164,
+        "recall": 0.7526205450733753,
+        "f1": 0.3900054318305269,
+        "brier_score": 0.2121881811019828,
+        "ece_10_bin": 0.27376347189030226
+      },
+      "fit_latency_ms": 99.77460000663996,
+      "prediction_latency_ms": 12.854300031904131,
+      "api_cost_usd": 0.0
+    }
+  },
+  "limitations": [
+    "Rows summarize completed sessions, so this is retrospective prediction.",
+    "A deployable early-session policy needs timestamped snapshots and prospective evaluation.",
+    "The dataset has no ground-truth hero or UI-component label."
+  ]
+}

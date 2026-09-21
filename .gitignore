@@ -4,3 +4,14 @@ out
 .env*
 !.env.example
 npm-debug.log*
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded benchmark data and live Jev output.
+benchmarks/online_shoppers/data/
+benchmarks/online_shoppers/results/jev_results*.json
+
+# Large local Kaggle competition data. Never commit this directory.
+data/ga-customer-revenue-prediction/
+benchmarks/google_analytics/local_results/
