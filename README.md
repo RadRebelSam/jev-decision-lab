@@ -199,6 +199,8 @@ A local streaming prototype now lives in [`benchmarks/google_analytics`](./bench
 
 A first 20-point `jev-latest` runtime-decision pilot produced all three available experience choices and a 10% decision flip rate across three repeats. Accuracy is intentionally not reported because this dataset has no correct personalization-component label. See the benchmark README for the recorded choice distribution, latency, token usage, and limitations.
 
+The follow-up hybrid router handled 212 of 300 decision points (`70.7%`) with explicit rules and reserved 88 (`29.3%`) for Jev. A context-balanced sample of 20 ambiguous points again produced all three experience choices with a 10% flip rate. This is the intended architecture: rules cover declared policy; Jev is limited to mixed runtime context.
+
 ## Project thesis
 
 **Rules for the obvious.**

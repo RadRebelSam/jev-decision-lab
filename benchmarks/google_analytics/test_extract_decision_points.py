@@ -7,6 +7,8 @@ from extract_decision_points import (
     clean_path,
     selected_visitor,
 )
+from hybrid_router import route_point, route_summary
+from run_hybrid_pilot import select_ambiguous_points
 from run_jev_pilot import format_point, select_points
 
 
@@ -98,6 +100,42 @@ class ExtractorTests(unittest.TestCase):
     def test_pilot_sample_is_reproducible(self) -> None:
         points = [{"decision_id": f"decision-{index}"} for index in range(10)]
         self.assertEqual(select_points(points, 5, 42), select_points(points, 5, 42))
+
+    def test_hybrid_routes_basket_without_jev(self) -> None:
+        point = {
+            "visit_number": 1,
+            "history_before_decision": [],
+            "current_state_at_decision": {
+                "traffic_source": {"is_true_direct": False},
+                "early_hits": [{"page_path": "/basket.html"}],
+            },
+        }
+        route = route_point(point)
+        self.assertFalse(route["needs_jev"])
+        self.assertEqual(route["choice"], "reduce_purchase_friction")
+
+    def test_hybrid_leaves_mixed_context_for_jev(self) -> None:
+        point = {
+            "visit_number": 1,
+            "history_before_decision": [],
+            "current_state_at_decision": {
+                "traffic_source": {"is_true_direct": False},
+                "early_hits": [{"page_path": "/google+redesign/bags"}],
+            },
+        }
+        self.assertTrue(route_point(point)["needs_jev"])
+
+    def test_hybrid_sample_balances_history_without_outcomes(self) -> None:
+        points = []
+        for index in range(20):
+            points.append(
+                {
+                    "decision_id": f"decision-{index}",
+                    "history_before_decision": [{}] if index < 6 else [],
+                }
+            )
+        selected = select_ambiguous_points(points, 10, 42)
+        self.assertEqual(sum(bool(point["history_before_decision"]) for point in selected), 5)
 
 
 if __name__ == "__main__":

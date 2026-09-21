@@ -61,3 +61,42 @@ A `jev-latest` pilot on September 21, 2026 used 20 deterministic decision points
 | API dollar cost | unavailable |
 
 The two changing decisions had probabilities near the option boundary. All three sessions assigned to `reduce_purchase_friction` later purchased, but this is a tiny descriptive cross-tab—not accuracy, uplift, or causal evidence. Only a randomized experiment can test whether showing that experience improves an outcome.
+
+## Hybrid router
+
+The hybrid experiment applies narrow deterministic policies before calling Jev:
+
+- basket or purchase-completion path -> reduce purchase friction;
+- direct return with prior history -> continue the previous journey;
+- first visit beginning at `/home` with no history -> guide product discovery;
+- every other mixed context -> Jev.
+
+Run the default pilot over 20 reproducibly sampled ambiguous points, with three Jev repeats each:
+
+```bash
+python benchmarks/google_analytics/run_hybrid_pilot.py
+```
+
+These rules are policy choices, not ground-truth labels. Their purpose is to make API routing explicit and auditable.
+
+The ambiguous pilot sample is balanced between contexts with and without prior-session history. Outcomes are not used for this sampling step.
+
+### Recorded hybrid pilot
+
+Across all 300 local points, deterministic rules handled 212 (`70.7%`) and routed 88 (`29.3%`) to Jev:
+
+| Function decision | Count |
+| --- | ---: |
+| Guide product discovery | 124 |
+| Continue previous journey | 60 |
+| Reduce purchase friction | 28 |
+
+A balanced sample of 20 ambiguous points—10 with prior history and 10 without—was run through `jev-latest` three times per point:
+
+| Jev modal decision | Count |
+| --- | ---: |
+| Guide product discovery | 15 |
+| Continue previous journey | 4 |
+| Reduce purchase friction | 1 |
+
+Two of the 20 points changed choice across repeats, for a 10% flip rate. The three batched requests took 1.69 seconds and used 20,781 input tokens plus 3,369 output tokens. Dollar cost was unavailable in the API response. Accuracy and business impact remain unavailable because there is no correct component label or randomized treatment.
