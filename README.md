@@ -197,6 +197,8 @@ The goal is to evaluate richer session-aware runtime decisions, not simply anoth
 
 A local streaming prototype now lives in [`benchmarks/google_analytics`](./benchmarks/google_analytics/README.md). It scans `train_v2.csv` without loading the 25 GB file into memory, reconstructs selected visitor histories, and creates leakage-aware decision points after the first three hits. Raw and derived Kaggle data remain ignored because competition rules may restrict redistribution.
 
+A first 20-point `jev-latest` runtime-decision pilot produced all three available experience choices and a 10% decision flip rate across three repeats. Accuracy is intentionally not reported because this dataset has no correct personalization-component label. See the benchmark README for the recorded choice distribution, latency, token usage, and limitations.
+
 ## Project thesis
 
 **Rules for the obvious.**

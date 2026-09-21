@@ -7,6 +7,7 @@ from extract_decision_points import (
     clean_path,
     selected_visitor,
 )
+from run_jev_pilot import format_point, select_points
 
 
 class ExtractorTests(unittest.TestCase):
@@ -56,6 +57,47 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(metadata["exported_positive_points"], 2)
         self.assertEqual(len(selected), 10)
         self.assertTrue(all("_rank" not in item for item in selected))
+
+    def test_pilot_state_excludes_scoring_outcome(self) -> None:
+        point = {
+            "decision_id": "decision-1",
+            "visit_number": 2,
+            "history_before_decision": [],
+            "current_state_at_decision": {
+                "channel_grouping": "Direct",
+                "traffic_source": {
+                    "source": "direct",
+                    "medium": "none",
+                    "campaign": "",
+                    "is_true_direct": True,
+                },
+                "device": {
+                    "category": "desktop",
+                    "operating_system": "Windows",
+                    "browser": "Chrome",
+                },
+                "early_hits": [
+                    {
+                        "hit_number": 1,
+                        "type": "PAGE",
+                        "page_path": "/home",
+                        "milliseconds_from_session_start": 0,
+                    }
+                ],
+            },
+            "outcome_for_scoring_only": {
+                "purchase_after_decision": True,
+                "revenue_micros": 123,
+            },
+        }
+        text = format_point(point)
+        self.assertNotIn("purchase_after_decision", text)
+        self.assertNotIn("revenue_micros", text)
+        self.assertNotIn("123", text)
+
+    def test_pilot_sample_is_reproducible(self) -> None:
+        points = [{"decision_id": f"decision-{index}"} for index in range(10)]
+        self.assertEqual(select_points(points, 5, 42), select_points(points, 5, 42))
 
 
 if __name__ == "__main__":

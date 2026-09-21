@@ -27,3 +27,37 @@ Output is written to `benchmarks/google_analytics/local_results/decision_points.
 The default export intentionally targets a 20% positive share so the small evaluation set contains useful purchase examples. This is not the dataset's natural prevalence. Accuracy on the exported sample must not be presented as population accuracy.
 
 This dataset still does not provide a correct hero or component label. The output supports later experiments on session-aware runtime decisions; it does not prove which personalization should have been shown or whether personalization improves business outcomes.
+
+## Jev runtime-decision pilot
+
+The pilot asks Jev which experience to prioritize after the first three hits:
+
+- continue the previous journey;
+- guide product discovery;
+- reduce purchase friction.
+
+Run the default 20-point, three-repeat pilot locally:
+
+```bash
+python benchmarks/google_analytics/run_jev_pilot.py
+```
+
+It reports decision stability, option distribution, latency, token usage, and API cost when returned. Accuracy is deliberately unavailable because the dataset has no ground-truth component label. Later purchase is shown only as a descriptive cross-tab; it is not treated as proof that a choice was correct or caused the outcome.
+
+### Recorded pilot
+
+A `jev-latest` pilot on September 21, 2026 used 20 deterministic decision points and three repeats per point:
+
+| Measurement | Result |
+| --- | ---: |
+| Guide product discovery | 15/20 modal decisions |
+| Continue previous journey | 2/20 modal decisions |
+| Reduce purchase friction | 3/20 modal decisions |
+| Points with a decision flip | 2/20 |
+| Decision flip rate | 10% |
+| Total batched latency | 1.47 seconds |
+| Input tokens | 19,713 |
+| Output tokens | 3,369 |
+| API dollar cost | unavailable |
+
+The two changing decisions had probabilities near the option boundary. All three sessions assigned to `reduce_purchase_friction` later purchased, but this is a tiny descriptive cross-tab—not accuracy, uplift, or causal evidence. Only a randomized experiment can test whether showing that experience improves an outcome.
