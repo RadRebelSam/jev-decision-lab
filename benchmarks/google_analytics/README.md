@@ -2,6 +2,8 @@
 
 This local-only experiment streams the Kaggle Google Analytics Customer Revenue Prediction `train_v2.csv`. It does not load the 25 GB file into memory.
 
+Dataset credit: the [Google Analytics Customer Revenue Prediction Kaggle competition](https://www.kaggle.com/competitions/ga-customer-revenue-prediction), hosted by RStudio with Google Merchandise Store data. Competition contributors include Christopher Crosbie, Mark McDonald, Mikhail Chrestkha, Phil Culliton, Roger Oberg, and Sina Chavoshi. The data is subject to the competition rules and is not redistributed here.
+
 The extractor:
 
 - selects visitors with a deterministic SHA-256 bucket;

@@ -207,6 +207,11 @@ A local streaming prototype now lives in [`benchmarks/google_analytics`](./bench
 
 **Randomized experiments for proving business impact.**
 
+## Dataset credits
+
+- **Online Shoppers Purchasing Intention:** created by C. O. Sakar and Yomi Kastro; available from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset) under CC BY 4.0; also available through [Akash Patel's Kaggle mirror](https://www.kaggle.com/datasets/imakash3011/online-shoppers-purchasing-intention-dataset).
+- **Google Analytics Customer Revenue Prediction:** provided through the [Kaggle competition](https://www.kaggle.com/competitions/ga-customer-revenue-prediction) hosted by RStudio with Google Merchandise Store data. Credit to competition contributors Christopher Crosbie, Mark McDonald, Mikhail Chrestkha, Phil Culliton, Roger Oberg, and Sina Chavoshi. The data is subject to the Kaggle competition rules and is not redistributed by this repository.
+
 ## Independence
 
 Independent Jev experiment by [RadRebelDeveloper](https://radrebeldeveloper.com). Not affiliated with TypeSafe AI.

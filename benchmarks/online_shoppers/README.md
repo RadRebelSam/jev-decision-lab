@@ -8,6 +8,8 @@ completed ecommerce session features -> purchase / no purchase
 
 It uses the [UCI Online Shoppers Purchasing Intention dataset](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset). The dataset contains 12,330 sessions and a real binary `Revenue` outcome. UCI distributes it under CC BY 4.0.
 
+Dataset credit: C. O. Sakar and Yomi Kastro, UCI Machine Learning Repository. A community mirror is maintained by Akash Patel on [Kaggle](https://www.kaggle.com/datasets/imakash3011/online-shoppers-purchasing-intention-dataset).
+
 This is not a personalization-component benchmark. The data does not say which hero or UI component should have been shown. It also cannot establish that Jev personalization causes conversion lift.
 
 ## Reproduce the structured baselines
