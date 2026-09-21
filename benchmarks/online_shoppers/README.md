@@ -57,6 +57,20 @@ The output includes accuracy, precision, recall, F1, Brier score and 10-bin ECE 
 
 Live Jev output is ignored by Git because it may vary by run and model. The public GitHub Pages build does not run this script and makes no live Jev calls.
 
+### Recorded live sample
+
+One `jev-latest` run used the default 30-session sample and five repeats on September 21, 2026. For a fair comparison, all three approaches were scored on the same 30 sessions:
+
+| Approach | Accuracy | Precision | Recall | F1 | Brier | 10-bin ECE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Simple rule | 0.400 | 0.118 | 0.400 | 0.182 | unavailable | unavailable |
+| Logistic Regression | 0.567 | 0.250 | 0.800 | 0.381 | 0.258 | 0.334 |
+| Jev | 0.167 | 0.167 | 1.000 | 0.286 | 0.436 | 0.546 |
+
+Jev chose `Purchase` for all 150 decisions. It had a 0% decision flip rate, but that stability is not useful because the decision collapsed to one class. The five batched requests took 2.37 seconds total and used 39,585 input tokens plus 5,140 output tokens. The API response did not provide a dollar cost, so cost is marked `unavailable`.
+
+This result is kept as evidence rather than tuned away. It shows that a stable answer is not necessarily a discriminative or calibrated answer, and that the classical model is a better fit for this fixed-label tabular sample.
+
 ## Feature and leakage policy
 
 `Revenue` is target-only. It never enters either model or the Jev state.

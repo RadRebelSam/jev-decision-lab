@@ -60,6 +60,8 @@ The reproducible seed-42 baseline run currently records:
 
 The dataset is imbalanced: 1,908 of 12,330 sessions end in a purchase. Logistic Regression uses balanced class weights, which improves positive-class detection but makes its raw probabilities less calibrated. The machine-readable result is in [`baseline_results.json`](./benchmarks/online_shoppers/results/baseline_results.json).
 
+A separate live `jev-latest` run evaluated the same 30 held-out sessions five times. Jev selected `Purchase` for all 150 decisions: accuracy `0.167`, F1 `0.286`, Brier score `0.436`, and 10-bin ECE `0.546`. Its decision flip rate was `0%`, but the stable output had collapsed to one class. On those same 30 sessions, Logistic Regression reached accuracy `0.567` and F1 `0.381`. This supports the project's thesis rather than being hidden: classical ML was the better fit for this fixed-label tabular sample.
+
 The dataset does **not** provide a correct hero or UI-component label. It does **not** prove conversion lift from Jev personalization. Its rows summarize completed sessions, so the benchmark is retrospective structured prediction rather than an early-session production decision. `Revenue` is target-only, and the late-session, outcome-adjacent `PageValues` field is excluded from every model and Jev prompt.
 
 See [`benchmarks/online_shoppers`](./benchmarks/online_shoppers/README.md) for the feature policy, limitations, exact reproduction commands, and stability method.

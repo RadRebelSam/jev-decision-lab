@@ -23,6 +23,8 @@ from benchmark import (
     TARGET,
     classification_metrics,
     load_dataset,
+    logistic_pipeline,
+    simple_rule_predict,
     split_dataset,
 )
 
@@ -188,8 +190,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("TYPESAFE_API_KEY is required and must remain server-side/local")
 
     frame = load_dataset(args.data, allow_download=not args.no_download)
-    _, test_x, _, test_y = split_dataset(frame, test_size=args.test_size, seed=args.seed)
+    train_x, test_x, train_y, test_y = split_dataset(
+        frame, test_size=args.test_size, seed=args.seed
+    )
     sample_x, sample_y = reproducible_sample(test_x, test_y, args.sample_size, args.seed)
+
+    rule_predictions = simple_rule_predict(sample_x)
+    logistic = logistic_pipeline()
+    logistic.fit(train_x, train_y)
+    logistic_probabilities = logistic.predict_proba(sample_x)[:, 1]
+    logistic_predictions = (logistic_probabilities >= 0.5).astype(int)
 
     records: list[dict[str, Any]] = []
     latencies: list[float] = []
@@ -231,6 +241,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         else None
     )
 
+    jev_metrics = classification_metrics(labels, predictions, probabilities)
+
     return {
         "dataset": {"source": DATASET_URL, "rows": len(frame)},
         "configuration": {
@@ -241,9 +253,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "model": args.model,
             "selected_features": SELECTED_FEATURES,
         },
-        "metrics_across_all_repeats": classification_metrics(
-            labels, predictions, probabilities
-        ),
+        "comparison_on_same_sample": {
+            "simple_rule": classification_metrics(sample_y, rule_predictions),
+            "logistic_regression": classification_metrics(
+                sample_y, logistic_predictions, logistic_probabilities
+            ),
+            "jev_across_all_repeats": jev_metrics,
+        },
+        "metrics_across_all_repeats": jev_metrics,
         "latency": {
             "total_ms": sum(latencies),
             "mean_request_ms": statistics.fmean(latencies),
