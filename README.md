@@ -39,6 +39,46 @@ Tests Jev against structured baselines using real ecommerce session data and a r
 
 Required to determine whether a Jev-powered personalization policy actually improves conversion, revenue per visitor, average order value, margin, or another business outcome.
 
+## Findings
+
+| Experiment | Finding | What it supports |
+| --- | --- | --- |
+| Eight designed personalization cases | Function only: 5/8. Function + Jev: 8/8. | A hybrid router can preserve explicit rules while using Jev for designed conflicts. This is behavioral proof, not statistical evidence. |
+| Real structured ecommerce prediction | On the same 30-session sample, Logistic Regression F1 was 0.381 and Jev F1 was 0.286. Jev predicted `Purchase` for all 150 repeated decisions. | Jev was a poor fit for this fixed-label tabular task. Classical ML is the better default here. |
+| Google Analytics runtime decisions | Rules handled 212/300 points (`70.7%`). Jev was reserved for 88 mixed-context points. A balanced 20-point Jev sample used all three options and had a 10% flip rate. | Explicit routing can reduce API use. Jev can express runtime choices, but stability is not correctness. |
+
+The evidence supports a narrower and more useful thesis:
+
+- Use deterministic functions when policy is known.
+- Use classical ML when labels and features are stable.
+- Use Jev when the decision options or context are defined at runtime.
+- Use confidence thresholds and safe fallbacks when Jev is uncertain.
+- Use randomized experiments before claiming business impact.
+
+The evidence does **not** show that Jev personalization improves conversion, revenue, average order value, or margin. The Google Analytics dataset has no correct personalization-component label. The observed relationship between a selected experience and a later purchase is descriptive only.
+
+## Project feedback
+
+### What is working
+
+- Negative results are reported instead of hidden.
+- The project distinguishes behavioral, predictive, and causal evidence.
+- API keys remain server-side, and the public build uses static results.
+- Target and late-session leakage are explicitly controlled.
+- The Google Analytics extractor reconstructs history without loading 25 GB into memory.
+- The hybrid router makes API usage narrow and auditable.
+
+### Current weaknesses
+
+- Jev evaluations are small: 30 structured sessions and 20 runtime decision points.
+- The runtime task has no human or experimental ground-truth component labels.
+- Jev confidence is recorded but is not yet used for abstention or fallback.
+- The balanced Logistic Regression probabilities are poorly calibrated.
+- There is no stronger tree-based tabular baseline such as CatBoost.
+- Dollar cost is unavailable because the API response reports tokens but not price.
+- The Google Analytics traffic is historical, from 2016–2018.
+- Kaggle competition rules prevent this repository from redistributing the derived data.
+
 ## Real Ecommerce Session Benchmark
 
 The second benchmark uses the [UCI Online Shoppers Purchasing Intention dataset](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset). It was selected because it is small, reproducible, and contains 12,330 real ecommerce sessions with a real binary `Revenue` outcome.
@@ -129,6 +169,7 @@ lib/
   personalization.ts  Three fixed variants and fallback
 benchmarks/
   online_shoppers/     Real ecommerce baselines and Jev stability run
+  google_analytics/    Local session-history extraction and hybrid pilot
 ```
 
 ## Decision architecture
@@ -161,45 +202,55 @@ Never prefix the API key with `NEXT_PUBLIC_`.
 
 See [DEPLOY.md](./DEPLOY.md) for the GitHub Pages deployment and custom-domain notes.
 
+## Google Analytics Session-History Benchmark
+
+The local [`benchmarks/google_analytics`](./benchmarks/google_analytics/README.md) workflow now:
+
+```text
+stream 25 GB train_v2.csv
+-> deterministically sample visitors
+-> reconstruct prior sessions
+-> capture state after the first three hits
+-> remove current-session outcomes
+-> route clear policy cases with functions
+-> send mixed context to Jev
+```
+
+The extractor scanned 1,708,337 sessions, selected 13,042 visitors, found 4,504 valid candidate points, and exported 300 local decision points. The local export contains 60 later purchases and 240 non-purchases. Raw visitor IDs, raw visit IDs, URL query strings, and current-session revenue are excluded from the decision state.
+
+The full dataset and derived points are not committed. The source is approximately 35.9 GB, uses a nested schema, contains historical 2016–2018 traffic, and is subject to Kaggle competition rules.
+
 ## Roadmap
 
-### Google Analytics Customer Revenue Prediction
+### Priority 0 — Make decisions safer
 
-A future, larger experiment can use the Kaggle Google Analytics Customer Revenue Prediction data from the Google Merchandise Store. Fields such as `trafficSource`, `channelGrouping`, `fullVisitorId`, `visitNumber`, `visitStartTime`, `hits`, and `totals` make it possible to reconstruct a richer sequence:
+- Add a Jev abstention policy based on probability, option margin, and repeated-run variance.
+- Fall back to a deterministic default when confidence is low or the decision flips.
+- Version prompts, model names, sampling seeds, dataset hashes, and result metadata together.
+- Add automated checks proving that scoring-only fields never enter a Jev request.
 
-```text
-traffic source
--> previous visits
--> page/hit sequence
--> current state
--> runtime decision
-```
+### Priority 1 — Strengthen offline evidence
 
-That is closer to this project's session-aware personalization thesis than another fixed revenue classifier. It also has important constraints:
+- Add CatBoost as the stronger tabular baseline.
+- Calibrate Logistic Regression using a separate validation split.
+- Run the full set of 88 ambiguous Google Analytics points after estimating token cost.
+- Ask independent reviewers to label a blinded subset of runtime decisions.
+- Report reviewer agreement before treating those labels as ground truth.
 
-- The full Kaggle competition data is roughly 35+ GB.
-- The schema is nested and much more expensive to preprocess.
-- The traffic is historical, from 2016–2018.
-- There is no ground-truth label saying which hero or component should have been shown.
+### Priority 2 — Test the product claim
 
-The full dataset will not be committed. The intended workflow is:
+- Define one production decision point and a small set of deployable experiences.
+- Instrument assignment, exposure, conversion, revenue, margin, and latency.
+- Pre-register the primary metric, guardrails, stopping rule, and sample-size calculation.
+- Run an online randomized experiment against a non-Jev control.
+- Use newer first-party data before making production recommendations from 2016–2018 traffic.
 
-```text
-process in a Kaggle Notebook
--> select a reproducible visitor subset
--> reconstruct session histories
--> extract roughly 100-500 decision points
--> export a small curated benchmark file
--> add it to Jev Decision Lab
-```
+### Priority 3 — Improve operations
 
-The goal is to evaluate richer session-aware runtime decisions, not simply another revenue prediction model.
-
-A local streaming prototype now lives in [`benchmarks/google_analytics`](./benchmarks/google_analytics/README.md). It scans `train_v2.csv` without loading the 25 GB file into memory, reconstructs selected visitor histories, and creates leakage-aware decision points after the first three hits. Raw and derived Kaggle data remain ignored because competition rules may restrict redistribution.
-
-A first 20-point `jev-latest` runtime-decision pilot produced all three available experience choices and a 10% decision flip rate across three repeats. Accuracy is intentionally not reported because this dataset has no correct personalization-component label. See the benchmark README for the recorded choice distribution, latency, token usage, and limitations.
-
-The follow-up hybrid router handled 212 of 300 decision points (`70.7%`) with explicit rules and reserved 88 (`29.3%`) for Jev. A context-balanced sample of 20 ambiguous points again produced all three experience choices with a 10% flip rate. This is the intended architecture: rules cover declared policy; Jev is limited to mixed runtime context.
+- Cache repeated decisions when the normalized state and options are unchanged.
+- Add latency and token budgets to routing policy.
+- Track fallbacks, malformed responses, drift, and option-distribution changes.
+- Publish only aggregate results that comply with source-data licensing and privacy rules.
 
 ## Project thesis
 
