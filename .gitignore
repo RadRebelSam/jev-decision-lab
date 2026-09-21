@@ -4,3 +4,10 @@ out
 .env*
 !.env.example
 npm-debug.log*
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded benchmark data and live Jev output.
+benchmarks/online_shoppers/data/
+benchmarks/online_shoppers/results/jev_results*.json
