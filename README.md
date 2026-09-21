@@ -195,6 +195,8 @@ process in a Kaggle Notebook
 
 The goal is to evaluate richer session-aware runtime decisions, not simply another revenue prediction model.
 
+A local streaming prototype now lives in [`benchmarks/google_analytics`](./benchmarks/google_analytics/README.md). It scans `train_v2.csv` without loading the 25 GB file into memory, reconstructs selected visitor histories, and creates leakage-aware decision points after the first three hits. Raw and derived Kaggle data remain ignored because competition rules may restrict redistribution.
+
 ## Project thesis
 
 **Rules for the obvious.**
