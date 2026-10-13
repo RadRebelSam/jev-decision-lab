@@ -235,6 +235,28 @@ python benchmarks/google_analytics/run_hybrid_pilot.py
 
 Raw and derived Kaggle data stay local and are ignored by Git.
 
+### Download the data
+
+The Experiment 3 data is large (about 34 GB in total) and is not stored in this repository.
+
+| File | Size | Needed for | Source |
+| --- | --- | --- | --- |
+| `train_v2.csv` | about 24 GB | Experiment 3 (the only file the extractor reads) | Kaggle competition data |
+| `test_v2.csv`, `train.csv`, `test.csv`, `sample_submission*.csv` | about 10 GB | not needed | same download |
+| `online_shoppers_intention.csv` | about 1 MB | Experiment 2 (already in `benchmarks/online_shoppers/data/`) | [UCI](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset) |
+
+1. Create a free Kaggle account and open the competition: <https://www.kaggle.com/competitions/ga-customer-revenue-prediction/data>.
+2. Join the competition and accept its rules. Kaggle refuses the download until you do.
+3. Download with the Kaggle CLI (`pip install kaggle`, then put your API token in `~/.kaggle/kaggle.json`):
+
+```bash
+kaggle competitions download -c ga-customer-revenue-prediction -f train_v2.csv -p data/ga-customer-revenue-prediction
+```
+
+   The command downloads a zip; unzip it so that `data/ga-customer-revenue-prediction/train_v2.csv` exists. You can also download the files by hand from the Data tab of the competition page.
+
+The data belongs to Kaggle and the competition hosts and is subject to the competition rules, so it is not redistributed here.
+
 ## Build the public static site
 
 The static build replays recorded Experiment 1 results and makes no Jev requests:
