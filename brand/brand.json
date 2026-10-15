@@ -6,10 +6,10 @@
  "generated": "2026-10-14",
  "note": "Machine-readable brand file. Edit palette.json and the logo files first, then keep this in step.",
  "colors": {
-  "ground": "#18161C",
-  "accent": "#6B64E9",
-  "accent_text_on_light": "#6B64E9",
-  "accent_bright_on_dark": "#7C76EB"
+  "ground": "#827217",
+  "accent": "#FFFFFF",
+  "accent_text_on_light": "#737373",
+  "accent_bright_on_dark": "#FFFFFF"
  },
  "fonts": [
   "TODO(ask)"
@@ -23,11 +23,25 @@
   "primary": "brand/logo-mark.svg",
   "files": [
    "brand/logo-mark.svg",
-   "brand/source/jev-decision-lab-logo.png"
+   "brand/source/jev-decision-lab-logo.png",
+   "brand/logo/mark.svg",
+   "brand/logo/lockup-horizontal-on-dark.svg",
+   "brand/logo/lockup-stacked-on-dark.svg",
+   "brand/logo/wordmark-on-dark.svg",
+   "brand/logo/lockup-horizontal-on-light.svg",
+   "brand/logo/lockup-stacked-on-light.svg",
+   "brand/logo/wordmark-on-light.svg"
   ]
  },
  "favicon": [
-  "brand/source/favicon.ico"
+  "brand/favicon/favicon-16.png",
+  "brand/favicon/favicon-32.png",
+  "brand/favicon/favicon-48.png",
+  "brand/favicon/favicon-180.png",
+  "brand/favicon/favicon-192.png",
+  "brand/favicon/favicon-512.png",
+  "brand/favicon/favicon.ico",
+  "brand/favicon/favicon.svg"
  ],
  "social": []
 }

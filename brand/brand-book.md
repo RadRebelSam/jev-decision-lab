@@ -22,10 +22,10 @@ One reference for how the JevDecisionLab brand is used on the web, in print and 
 
 | Role | Value | Measured contrast |
 |---|---|---|
-| Ground | `#18161C` | white on ground 17.94:1 |
-| Accent (logo) | `#6B64E9` | on ground 3.95:1 |
-| Accent as text on a light page | `#6B64E9` | 4.54:1 on white (needs 4.5:1) |
-| Accent bright, on dark | `#7C76EB` | 4.83:1 on `#18161C` |
+| Ground | `#827217` | white on ground 4.81:1 |
+| Accent (logo) | `#FFFFFF` | on ground 4.81:1 |
+| Accent as text on a light page | `#737373` | 4.74:1 on white (needs 4.5:1) |
+| Accent bright, on dark | `#FFFFFF` | 4.81:1 on `#827217` |
 
 Body text needs 4.5:1, large text and interface parts 3:1. Use the text-safe accent for any accent-coloured text on a light page.
 
