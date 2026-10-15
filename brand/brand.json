@@ -1,0 +1,33 @@
+{
+ "name": "JevDecisionLab",
+ "slug": "jevdecisionlab",
+ "domain": "jevdecisionlab.radrebeldeveloper.com",
+ "tagline": "TODO(ask)",
+ "generated": "2026-10-14",
+ "note": "Machine-readable brand file. Edit palette.json and the logo files first, then keep this in step.",
+ "colors": {
+  "ground": "#18161C",
+  "accent": "#6B64E9",
+  "accent_text_on_light": "#6B64E9",
+  "accent_bright_on_dark": "#7C76EB"
+ },
+ "fonts": [
+  "TODO(ask)"
+ ],
+ "voice": [
+  "TODO(ask)",
+  "TODO(ask)",
+  "TODO(ask)"
+ ],
+ "logo": {
+  "primary": "brand/logo-mark.svg",
+  "files": [
+   "brand/logo-mark.svg",
+   "brand/source/jev-decision-lab-logo.png"
+  ]
+ },
+ "favicon": [
+  "brand/source/favicon.ico"
+ ],
+ "social": []
+}
