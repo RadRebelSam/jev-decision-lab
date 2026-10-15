@@ -5,7 +5,7 @@ One reference for how the JevDecisionLab brand is used on the web, in print and 
 ## Logo
 
 - Primary mark: `logo-mark.svg`
-- All logo files: `favicon/favicon.svg`, `logo-mark.svg`, `logo/lockup-horizontal-on-dark.png`, `logo/lockup-horizontal-on-dark.svg`, `logo/lockup-horizontal-on-light.png`, `logo/lockup-horizontal-on-light.svg`, `logo/lockup-stacked-on-dark.png`, `logo/lockup-stacked-on-dark.svg`
+- All logo files: `favicon/favicon.svg`, `logo-mark.svg`, `logo/lockup-horizontal-black.png`, `logo/lockup-horizontal-black.svg`, `logo/lockup-horizontal-on-dark.png`, `logo/lockup-horizontal-on-dark.svg`, `logo/lockup-horizontal-on-light.png`, `logo/lockup-horizontal-on-light.svg`
 - Clear space: keep free space around the mark equal to one quarter of the mark's width on every side.
 - Minimum size: 16 px for the favicon cut, 24 px for the mark elsewhere on screen, 10 mm in print.
 - Use the version that matches the ground: light mark on dark, dark mark on light. Never place the mark on a busy image.
@@ -22,10 +22,10 @@ One reference for how the JevDecisionLab brand is used on the web, in print and 
 
 | Role | Value | Measured contrast |
 |---|---|---|
-| Ground | `#827217` | white on ground 4.81:1 |
-| Accent (logo) | `#FFFFFF` | on ground 4.81:1 |
+| Ground | `#7C5CFF` | white on ground 4.35:1 |
+| Accent (logo) | `#827217` | on ground 1.11:1 |
 | Accent as text on a light page | `#827217` | 4.81:1 on white (needs 4.5:1) |
-| Accent bright, on dark | `#FCFAED` | 4.59:1 on `#827217` |
+| Accent bright, on dark | `#FFFFFF` | 4.35:1 on `#7C5CFF` |
 
 Body text needs 4.5:1, large text and interface parts 3:1. Use the text-safe accent for any accent-coloured text on a light page.
 

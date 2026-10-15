@@ -1,18 +1,20 @@
 {
  "generated": "2026-10-15",
  "source": "read from the logo SVG files in brand/; contrast measured (WCAG 2.x)",
- "ground": "#827217",
- "accent": "#FFFFFF",
+ "ground": "#7C5CFF",
+ "accent": "#827217",
  "accent_text_on_light": "#827217",
- "accent_bright_on_dark": "#FCFAED",
+ "accent_bright_on_dark": "#FFFFFF",
  "colors_found_in_logo_files": [
   "#827217",
-  "#FFFFFF"
+  "#FFFFFF",
+  "#000000",
+  "#7C5CFF"
  ],
  "contrast": {
-  "accent_on_ground": 4.81,
+  "accent_on_ground": 1.11,
   "accent_text_on_light_vs_white": 4.81,
-  "accent_bright_on_dark_vs_827217": 4.59,
-  "white_on_ground": 4.81
+  "accent_bright_on_dark_vs_7C5CFF": 4.35,
+  "white_on_ground": 4.35
  }
 }

@@ -6,10 +6,10 @@
  "generated": "2026-10-15",
  "note": "Machine-readable brand file. Edit palette.json and the logo files first, then keep this in step.",
  "colors": {
-  "ground": "#827217",
-  "accent": "#FFFFFF",
+  "ground": "#7C5CFF",
+  "accent": "#827217",
   "accent_text_on_light": "#827217",
-  "accent_bright_on_dark": "#FCFAED"
+  "accent_bright_on_dark": "#FFFFFF"
  },
  "fonts": [
   "Segoe UI, system-ui, -apple-system, Helvetica Neue, Arial, sans-serif",
@@ -25,18 +25,25 @@
   "files": [
    "brand/favicon/favicon.svg",
    "brand/logo-mark.svg",
+   "brand/logo/lockup-horizontal-black.png",
+   "brand/logo/lockup-horizontal-black.svg",
    "brand/logo/lockup-horizontal-on-dark.png",
    "brand/logo/lockup-horizontal-on-dark.svg",
    "brand/logo/lockup-horizontal-on-light.png",
    "brand/logo/lockup-horizontal-on-light.svg",
+   "brand/logo/lockup-horizontal-white.png",
+   "brand/logo/lockup-horizontal-white.svg",
    "brand/logo/lockup-stacked-on-dark.png",
    "brand/logo/lockup-stacked-on-dark.svg",
-   "brand/logo/lockup-stacked-on-light.png",
-   "brand/logo/lockup-stacked-on-light.svg",
    "brand/logo/mark.svg",
-   "brand/logo/wordmark-on-dark.png",
    "brand/logo/wordmark-on-dark.svg",
-   "brand/logo/wordmark-on-light.svg"
+   "brand/logo/lockup-stacked-on-light.svg",
+   "brand/logo/wordmark-on-light.svg",
+   "brand/logo/mark-black.svg",
+   "brand/logo/mark-white.svg",
+   "brand/logo/mark-content-transparent.svg",
+   "brand/logo/mark-content-on-white.svg",
+   "brand/logo/mark-content-on-black.svg"
   ]
  },
  "favicon": [
