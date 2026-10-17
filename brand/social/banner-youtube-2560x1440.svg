@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2560 1440" width="2560" height="1440">
-  <rect width="2560" height="1440" fill="#827217"/><svg x="830" y="483.559" width="900" height="472.881" viewBox="0 0 590 310">
-  <svg x="195" y="10" width="200" height="200" viewBox="0 0 512 512"><rect width="512" height="512" rx="116" fill="#827217"/>
+  <rect width="2560" height="1440" fill="#7C5CFF"/><svg x="830" y="483.559" width="900" height="472.881" viewBox="0 0 590 310">
+  <svg x="195" y="10" width="200" height="200" viewBox="0 0 512 512"><rect width="512" height="512" rx="116" fill="#7C5CFF"/>
   <path d="M208 92 H304 V214 L394 380 A30 30 0 0 1 368 424 H144 A30 30 0 0 1 118 380 L208 214 Z" fill="#FFFFFF"/><circle cx="228" cy="352" r="22" fill="#827217"/><circle cx="292" cy="318" r="14" fill="#827217"/></svg><text x="295" y="296" text-anchor="middle" font-family="Segoe UI, system-ui, -apple-system, Helvetica Neue, Arial, sans-serif" font-size="76" font-weight="400" letter-spacing="3.04" fill="#FFFFFF">JevDecisionLab</text>
 </svg>
 </svg>
