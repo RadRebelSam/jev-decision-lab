@@ -4,7 +4,7 @@ Edit this file. Anything marked TODO(ask) could not be read from the project fil
 
 - **What we do:** Jev Decision Lab is an open-source evidence project for matching a decision problem to the right tool. It compares deterministic rules, classical machine learning, and Jev across three different experiments instead of assuming one approach 
 - **Who we are for:** TODO(ask)
-- **Three voice words:** TODO(ask)
+- **Three voice words:** Curious, hands-on, candid (owner, 2026-10-18)
 - **Tagline:** Rules, ML, or Jev: which one, when (owner, 2026-10-18)
 - **Positioning and USP:** TODO(ask)
 - **Messaging:** TODO(ask)

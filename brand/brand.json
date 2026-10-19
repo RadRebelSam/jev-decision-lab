@@ -16,9 +16,9 @@
   "system-ui, sans-serif"
  ],
  "voice": [
-  "TODO(ask)",
-  "TODO(ask)",
-  "TODO(ask)"
+  "Curious",
+  "hands-on",
+  "candid"
  ],
  "logo": {
   "primary": "brand/logo-mark.svg",
