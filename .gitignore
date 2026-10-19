@@ -15,3 +15,9 @@ benchmarks/online_shoppers/results/jev_results*.json
 # Large local Kaggle competition data. Never commit this directory.
 data/ga-customer-revenue-prediction/
 benchmarks/google_analytics/local_results/
+
+# Generated and local-only files (2026-10-18)
+RECOVER.md
+desktop.ini
+Thumbs.db
+brand/business/
