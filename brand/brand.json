@@ -12,8 +12,8 @@
   "accent_bright_on_dark": "#FFFFFF"
  },
  "fonts": [
-  "Segoe UI, system-ui, -apple-system, Helvetica Neue, Arial, sans-serif",
-  "system-ui, sans-serif"
+  "'Arial Rounded MT Bold', 'Segoe UI', Arial, sans-serif",
+  "'Inter', 'Segoe UI', Arial, sans-serif"
  ],
  "voice": [
   "Curious",
